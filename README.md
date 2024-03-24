@@ -8,6 +8,8 @@ Params:
 - `interval=30` to set rendering interval
 - `mode=dev` for logs
 - `threshold=0.2` to set value threshold of gamepad axes
+- `tab=stars` for default open tab, for example `stars`
+- `hide-tabs=true` for hiding nav tab
 
 Resources:
 

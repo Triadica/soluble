@@ -52,7 +52,7 @@ let disconnecthandler = (e: GamepadEvent) => {
 
 let gameLoop = () => {
   const gamepads = navigator.getGamepads();
-  let gp = gamepads[0];
+  let gp = gamepads[0] || gamepads[1] || gamepads[2];
   let [face1, face2, face3, face4, l1, r1, l2, r2, select, start, l3, r3, up, down, left, right] = gp.buttons;
   let [leftX, leftY, rightX, rightY] = gp.axes;
 

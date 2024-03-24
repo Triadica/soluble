@@ -8,13 +8,13 @@
     "prepare": "yarn compile"
   },
   "devDependencies": {
-    "@calcit/procs": "^0.8.38",
-    "@types/node": "^20.11.24",
+    "@calcit/procs": "^0.8.44",
+    "@types/node": "^20.11.30",
     "@webgpu/types": "^0.1.40",
     "bottom-tip": "^0.1.5",
     "prettier": "^3.2.5",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.3",
     "vite-plugin-glsl": "^1.2.1"
   },
   "dependencies": {

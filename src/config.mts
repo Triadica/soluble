@@ -7,7 +7,7 @@ export let coneBackScale = 0.5;
 
 export let isMobile = isMobilejs(window.navigator).any; // TODO test
 
-export let useBaseSize = parseInt((parsed["base-size"] as string) || "60");
+export let useBaseSize = parseInt((parsed["base-size"] as string) || "40");
 
 export let useRemoteControl = parsed["remote-control"];
 

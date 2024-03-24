@@ -1,4 +1,4 @@
-import { V2, V3 } from "./primes.mjs";
+import { V2, V3, V4 } from "./primes.mjs";
 
 export let square = (x: number): number => {
   return x * x;
@@ -31,3 +31,8 @@ export const randBalance = (max: number) => {
 };
 
 export type Number4 = [number, number, number, number];
+
+export let normalize = (v: V4): V4 => {
+  let len = Math.sqrt(sumSquares(v[0], v[1], v[2]));
+  return [v[0] / len, v[1] / len, v[2] / len, v[3] / len];
+};

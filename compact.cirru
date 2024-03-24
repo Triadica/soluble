@@ -60,7 +60,7 @@
                 :color :white
         |tabs $ %{} :CodeEntry (:doc |)
           :code $ quote
-            def tabs $ [] (:: :cubic-fire "\"Cubic Fire" :dark) (:: :quaternion-fractal "\"Quaternion Fractal" :dark) (:: :complex-fractal "\"Complex Fractal" :dark) (:: :space-fractal "\"Space Fractal" :dark) (:: :sphere-fractal "\"Sphere Fractal" :dark) (:: :slow-fractal "\"Slow Fractal" :dark) (:: :orbits "\"Orbits" :dark) (:: :stars "\"Stars" :dark)
+            def tabs $ [] (:: :cubic-fire "\"Cubic Fire" :dark) (:: :quaternion-fractal "\"Quaternion Fractal" :dark) (:: :complex-fractal "\"Complex Fractal" :dark) (:: :space-fractal "\"Space Fractal" :dark) (:: :sphere-fractal "\"Sphere Fractal" :dark) (:: :slow-fractal "\"Slow Fractal" :dark) (:: :orbits "\"Orbits" :dark) (:: :stars "\"Stars" :dark) (:: :rings "\"Rings" :dark) (:: :circles "\"Circles" :dark)
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
           ns app.comp.container $ :require (respo-ui.css :as css)
@@ -111,7 +111,18 @@
         |get-app $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn get-app (tab)
-              case-default tab (js/console.warn "\"Unknown tab" tab cubicFireConfigs) (:cubic-fire cubicFireConfigs) (:quaternion-fractal quaternionFractalConfigs) (:complex-fractal complexFractalConfigs) (:space-fractal spaceFractalConfigs) (:sphere-fractal sphereFractalConfigs) (:slow-fractal slowFractalConfigs) (:orbits orbitsConfigs) (:stars stars/configs)
+              case-default tab
+                do (js/console.warn "\"Unknown tab" tab) cubicFireConfigs
+                :cubic-fire cubicFireConfigs
+                :quaternion-fractal quaternionFractalConfigs
+                :complex-fractal complexFractalConfigs
+                :space-fractal spaceFractalConfigs
+                :sphere-fractal sphereFractalConfigs
+                :slow-fractal slowFractalConfigs
+                :orbits orbitsConfigs
+                :stars stars/configs
+                :rings rings/configs
+                :circles circles/configs
         |loop-paint! $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn loop-paint! ()
@@ -145,7 +156,7 @@
               js/window.addEventListener |visibilitychange $ fn (event)
                 if (= "\"hidden" js/document.visibilityState) (persist-storage!)
               flipped js/setInterval 60000 persist-storage!
-              let
+              ; let
                   raw $ js/localStorage.getItem (:storage-key config/site)
                 when (some? raw)
                   dispatch! $ :: :hydrate-storage (parse-cirru-edn raw)
@@ -202,12 +213,15 @@
             "\"../src/apps/slow-fractal" :refer $ slowFractalConfigs
             "\"../src/apps/orbits" :refer $ orbitsConfigs
             "\"../src/apps/stars" :as stars
+            "\"../src/apps/rings" :as rings
+            "\"../src/apps/circles" :as circles
             "\"../src/global" :refer $ atomLagopusTree
     |app.schema $ %{} :FileEntry
       :defs $ {}
         |store $ %{} :CodeEntry (:doc |)
           :code $ quote
-            def store $ {} (:tab :cubic-fire)
+            def store $ {}
+              :tab $ turn-tag (get-env "\"tab" "\"circles")
               :states $ {}
                 :cursor $ []
       :ns $ %{} :CodeEntry (:doc |)
@@ -220,7 +234,7 @@
               tag-match op
                   :states cursor s
                   update-states store cursor s
-                (:tab t) (assoc store :tab t)
+                (:tab t theme) (assoc store :tab t)
                 (:hydrate-storage data) data
                 _ $ do (eprintln "\"unknown op:" op) store
       :ns $ %{} :CodeEntry (:doc |)
